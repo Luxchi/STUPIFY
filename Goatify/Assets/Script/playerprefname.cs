@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class playerprefname : MonoBehaviour
 {
     // Start is called before the first frame update
-    public InputField nameInputField;
+    public InputField ageInputField;
     void Start()
     {
-        nameInputField.text = PlayerPrefs.GetString("NamePass");
+       ageInputField.text = PlayerPrefs.GetInt("AgePass").ToString();
     }
 
     // Update is called once per frame

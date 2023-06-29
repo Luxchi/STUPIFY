@@ -672,13 +672,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 819464334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eacc9bbf2b265c848a5b7086202a187a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7042499a1b458f74ea1e50b0b17dd157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nameInputField: {fileID: 0}
   ageInputField: {fileID: 0}
+  datebirthInputField: {fileID: 0}
+  dateentryageInputField: {fileID: 0}
+  weightInputField: {fileID: 0}
+  notesInputField: {fileID: 0}
+  breedDropdown: {fileID: 0}
+  genderDropdown: {fileID: 0}
+  obtainDropdown: {fileID: 0}
   dataTextPrefab: {fileID: 214869277}
   dataTextContainer: {fileID: 627446476}
+  updateButton: {fileID: 0}
 --- !u!4 &819464336
 Transform:
   m_ObjectHideFlags: 0
@@ -808,7 +816,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 1, g: 0.71132076, b: 0.71132076, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

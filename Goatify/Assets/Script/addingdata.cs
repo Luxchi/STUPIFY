@@ -5,14 +5,21 @@ using System.IO;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class savingdata : MonoBehaviour
+public class addingdata : MonoBehaviour
 {
     public InputField nameInputField;
     public InputField ageInputField;
 
-    //public Text jsonText; // Reference to the Text component to display JSON data
-    //public Text nameText; // Reference to the Text component for displaying name
-    //public Text ageText; // Reference to the Text component for displaying age
+    public InputField datebirthInputField; // change date picker 
+    public InputField dateentryageInputField;// change date picker
+    public InputField weightInputField;
+    public InputField notesInputField;
+
+
+    public Dropdown breedDropdown;
+    public Dropdown genderDropdown;
+    public Dropdown obtainDropdown;
+
     public GameObject dataTextPrefab; // Reference to the Text prefab
     public Transform dataTextContainer; // Reference to the parent Transform for the created Text objects
     private string dataFilePath;
@@ -20,11 +27,13 @@ public class savingdata : MonoBehaviour
 
     private void Awake()
     {
-        dataFilePath = Path.Combine(Application.dataPath, "GoatInfo.json");
+        //dataFilePath = Path.Combine(Application.persistentDataPath, "GoatInfo.json");
+        dataFilePath = Path.Combine(Application.persistentDataPath, "GoatInfo.json");
     }
 
     private void Start()
     {
+        dataList = new List<Data>();
         LoadData();
         ExampleUsage();
     }
@@ -50,11 +59,29 @@ public class savingdata : MonoBehaviour
     }
 
     public void AddData()
-    {
+    {   
+        int selectedBreed = breedDropdown.value;
+        int selectedGender = genderDropdown.value;
+        int selectedObtain = obtainDropdown.value;
+
+        string breedselectedText = breedDropdown.options[selectedBreed].text;
+        string genderselectedText = genderDropdown.options[selectedGender].text;
+        string obtainselectedText =  obtainDropdown.options[selectedObtain].text;
+
         string name = nameInputField.text;
         int age = int.Parse(ageInputField.text);
 
-        Data newData = new Data(name, age);
+        string birth= datebirthInputField.text;
+        string entry = dateentryageInputField.text;
+        string weight = weightInputField.text;
+        string notes = notesInputField.text;
+
+        string breed = breedselectedText;
+        string gender = genderselectedText;
+        string obtain =  obtainselectedText;
+
+
+        Data newData = new Data(name, age, birth,entry,weight,notes, breed, gender, obtain );
         dataList.Add(newData);
 
         SaveData();
@@ -63,28 +90,7 @@ public class savingdata : MonoBehaviour
     // Example usage
     private void ExampleUsage()
     {
-        // Display the JSON data
-        //string json = JsonUtility.ToJson(new DataListWrapper(dataList), true);
-        //Debug.Log(json);
 
-        // Display the JSON data in the Text object
-        //string json = JsonUtility.ToJson(new DataListWrapper(dataList), true);
-        //jsonText.text = json;
-
-        //string nameData = "";
-        //string ageData = "";
-
-        //foreach (Data data in dataList)
-        //{
-        //    nameData += data.name + "\n";
-        //    ageData += data.age.ToString() + "\n";
-        //}
-
-        //nameText.text = nameData;
-        //ageText.text = ageData;
-
-        
-        // Clear the existing Text objects
     foreach (Transform child in dataTextContainer)
         {
             Destroy(child.gameObject);
@@ -98,7 +104,7 @@ public class savingdata : MonoBehaviour
             // Instantiate the dataTextPrefab
             GameObject dataTextObject = Instantiate(dataTextPrefab, dataTextContainer);
             Text dataText = dataTextObject.GetComponent<Text>();
-            dataText.text = "Name: " + data.name +" "+ "Age: " + data.age;
+            dataText.text = "Name: " + data.name +" "+ "No.: " + data.age;
 
             // Position the Text object
             RectTransform textTransform = dataTextObject.GetComponent<RectTransform>();
@@ -110,7 +116,7 @@ public class savingdata : MonoBehaviour
 
             // Add the button component and set its properties
             Button button = buttonObject.AddComponent<Button>();
-            button.onClick.AddListener(() => OnButtonClick(data.name));
+            button.onClick.AddListener(() => OnButtonClick(data.name, data.age));
 
             // Add a Text component to the button and set its properties
             Text buttonText = buttonObject.AddComponent<Text>();
@@ -136,20 +142,22 @@ public class savingdata : MonoBehaviour
     }
 
     
-    private void OnButtonClick(string name)
+    private void OnButtonClick(string name, int age)
     {
         PlayerPrefs.SetString("NamePass", name);
-        SceneManager.LoadScene("UpdateGoat");
-
+        PlayerPrefs.SetInt("AgePass", age);
+        //SceneManager.LoadScene("UpdateGoat");
+        SceneManager.LoadScene("DisplayGoat");
         // inputField.text = PlayerPrefs.GetString("INamePassnput");
         
     }
     //udpdating data 
-    public int GetIndexByName(string name)
+    //public int GetIndexByName(string name)
+    public int GetIndexByAge(int age)
     {
         for (int i = 0; i < dataList.Count; i++)
         {
-            if (dataList[i].name == name)
+            if (dataList[i].age == age)
             {
                 return i; // Return the index of the matching entry
             }
@@ -161,8 +169,9 @@ public class savingdata : MonoBehaviour
     public void SearchAndDisplayData()
     {   
         
-        string name = nameInputField.text;
-        int index = GetIndexByName(name);
+        //string name = nameInputField.text;
+        int age = int.Parse(ageInputField.text);
+        int index = GetIndexByAge(age);// tag number will replace this 
         
         if (index >= 0)
         {
@@ -210,11 +219,25 @@ public class Data
 {
     public string name;
     public int age;
+    public string birth;
+    public string entry;
+    public string weight;
+    public string notes;
+    public string breed;
+    public string gender;
+    public string obtain;
 
-    public Data(string name, int age)
+    public Data(string name, int age,string birth,string entry,string weight,string notes,string breed,string gender,string obtain)
     {
         this.name = name;
         this.age = age;
+        this.birth = birth;
+        this.entry = entry;
+        this.weight = weight;
+        this.notes = notes;
+        this.breed = breed;
+        this.gender = gender;
+        this.obtain = obtain;
     }
 }
 

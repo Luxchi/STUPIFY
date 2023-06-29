@@ -29,4 +29,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UpdateGoat.unity
     guid: a54e7d9e73984cf4aa77dc3082291a05
+  - enabled: 1
+    path: Assets/Scenes/DisplayGoat.unity
+    guid: 3720c6c4f3b24f6468a828a01293cd2f
+  - enabled: 1
+    path: Assets/Scenes/Archive.unity
+    guid: 8dcda762c62e00c4b9bbd51db5d42cfc
+  - enabled: 1
+    path: Assets/Scenes/DisplayArchive.unity
+    guid: 12508c1691e0b5c439743c8ba2859df3
   m_configObjects: {}
