@@ -214,7 +214,22 @@ public class savingdata : MonoBehaviour
 
             SetDropdownValue(breedDropdown, targetItem.breed);
             SetDropdownValue(genderDropdown, targetItem.gender);
-            SetDropdownValue(obtainDropdown, targetItem.obtain);
+           
+            if (targetItem.obtain == "Born of farm" || targetItem.obtain == "Purchased")
+            {
+                // Show the input field
+                 otherinputField.gameObject.SetActive(false);
+                SetDropdownValue(obtainDropdown, targetItem.obtain);
+
+            }
+            else
+            {
+                // Hide the input field
+                
+                SetDropdownValue(obtainDropdown, "Other");
+                otherinputField.gameObject.SetActive(true);
+                otherinputField.text = targetItem.obtain;
+            }
         }
         else
         {
@@ -257,9 +272,6 @@ public class savingdata : MonoBehaviour
             Debug.Log("No data item found with the specified age: " + targetAge);
         }
     }
-     public void Button4 () {
-      Popup.Show ("Success", "Your Goat  save successfully.", "OK", PopupColor.Green, () => AddData()) ;
-   }
      private void OnDropdownValueChanged(int value)
         {
             // Check if the selected option is "Other"
