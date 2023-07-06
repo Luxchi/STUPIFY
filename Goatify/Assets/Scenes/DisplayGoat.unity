@@ -5379,6 +5379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameInputField: {fileID: 726828190}
   ageInputField: {fileID: 726828190}
+  agedisplayInputField: {fileID: 726828190}
   datebirthInputField: {fileID: 726828190}
   dateentryageInputField: {fileID: 726828190}
   weightInputField: {fileID: 726828190}
