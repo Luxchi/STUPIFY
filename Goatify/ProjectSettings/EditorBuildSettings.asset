@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/MainMenuF.unity
+    guid: 5e248754c2a71ab4fb6b8208457530d0
   - enabled: 1
-    path: Assets/Scenes/GOATKEEPING.unity
-    guid: 186f13e2210d6b641a037a33442ed6b3
+    path: Assets/Scenes/GOATKEEPINGF.unity
+    guid: e2be1a17c197341488fe71c4e54d8a4e
   - enabled: 1
     path: Assets/Scenes/SCHEDULE.unity
     guid: 3c9772a807491ca4abbb8d2aca3ce857
@@ -20,9 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GoatTest.unity
     guid: 7f2a76b465f5fde4bb82e194b73d7a26
-  - enabled: 0
-    path: Assets/Scenes/GOAT.unity
-    guid: 4182bb454d719f9438f1a452260d3a9b
   - enabled: 1
     path: Assets/Scenes/REMINDER.unity
     guid: c5b17a45d51f2ad4ea05c3a1e77e0f60
