@@ -16,9 +16,12 @@ public class savingdata : MonoBehaviour
     public InputField dateentryageInputField;
     public InputField weightInputField;
     public InputField notesInputField;
+    //public InputField stagesInputField;
     public Dropdown breedDropdown;
     public Dropdown genderDropdown;
     public Dropdown obtainDropdown;
+    public Dropdown stageMaleDropdown;
+    public Dropdown stageFemaleDropdown;
 
     public InputField otherinputField;
 
@@ -36,6 +39,8 @@ public class savingdata : MonoBehaviour
     private string dataFilePathArchive;
     private List<GoatData> dataList;
 
+    public string stageGoat;
+
     
     private MyDataGoat myData;
     //private DatePicker datePicker;
@@ -52,6 +57,7 @@ public class savingdata : MonoBehaviour
         LoadData();
         int targetAge = PlayerPrefs.GetInt("AgePass");
         DisplayDataByAge(targetAge);
+        genderDropdown.onValueChanged.AddListener(OngenderDropdownValueChanged);// for gender 
          obtainDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
         // datePicker.SelectedDate = DateTime.Today;
         int randomNum = Random.Range(1000, 10000);
@@ -87,6 +93,7 @@ public class savingdata : MonoBehaviour
         string notes = notesInputField.text;
         string breed = breedDropdown.options[breedDropdown.value].text;
         string gender = genderDropdown.options[genderDropdown.value].text;
+        
         //string obtain = obtainDropdown.options[obtainDropdown.value].text;
         string obtain;
         if (obtainDropdown.options[obtainDropdown.value].text == "Other")
@@ -98,9 +105,17 @@ public class savingdata : MonoBehaviour
                 
                  obtain = obtainDropdown.options[obtainDropdown.value].text;
             }
-
-
-        GoatData newData = new GoatData(name, age, birth, entry, weight, notes, breed, gender, obtain);
+        string stageG;
+        if (stageGoat == "Male")
+            {
+                 stageG = stageMaleDropdown.options[stageMaleDropdown.value].text;
+            }
+            else
+            {
+                
+                 stageG = stageFemaleDropdown.options[stageFemaleDropdown.value].text;
+            }
+        GoatData newData = new GoatData(name, age, birth, entry, weight, notes, breed, gender, obtain, stageG);
         dataList.Add(newData);
 
         SaveData();
@@ -187,6 +202,7 @@ public class savingdata : MonoBehaviour
                 
                 targetData.obtain = obtainDropdown.options[obtainDropdown.value].text;
             }
+            
 
             // Save the updated data
             SaveData();
@@ -296,6 +312,30 @@ public class savingdata : MonoBehaviour
         Debug.Log("EntryChoose method called");
         dateentryageInputField.text = DatePickerControl.dateStringFormato;
     }
+
+    private void OngenderDropdownValueChanged(int Newvalue)
+    {
+
+        //targetObject.SetActive(true);
+        // value 0 corresponds to the first option, value 1 corresponds to the second option, and so on.
+       if (Newvalue == 0)
+        {
+            //targetFemale.SetActive(false);
+           // targetMale.SetActive(true);
+           //stageGoat = stageMaleDropdown.options[stageMaleDropdown.value].text;
+           stageGoat = "Male";
+           Debug.Log(stageGoat);
+            
+        }
+        else
+        {   
+            //targetMale.SetActive(false);
+            //targetFemale.SetActive(true);
+            //stageGoat = stageFemaleDropdown.options[stageFemaleDropdown.value].text;
+            stageGoat = "Female";
+            Debug.Log(stageGoat);
+        }
+    }
 }
 
 
@@ -311,8 +351,9 @@ public class GoatData
     public string breed;
     public string gender;
     public string obtain;
+    public string stageG;
 
-    public GoatData(string name, int age, string birth, string entry, string weight, string notes, string breed, string gender, string obtain)
+    public GoatData(string name, int age, string birth, string entry, string weight, string notes, string breed, string gender, string obtain, string stageG)
     {
         this.name = name;
         this.age = age;
@@ -323,6 +364,7 @@ public class GoatData
         this.breed = breed;
         this.gender = gender;
         this.obtain = obtain;
+        this.stageG = stageG;
     }
 }
 

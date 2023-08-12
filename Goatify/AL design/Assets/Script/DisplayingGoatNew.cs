@@ -9,8 +9,8 @@ public class DisplayingGoatNew : MonoBehaviour
 {
     public GameObject buttonsContainerPrefab;
     public Transform containerParent;
-    private float steadyHeight = 1570f;
-    private float extraItemHeight = 260f; // Set to a positive value here
+    //private float steadyHeight = 1570f;
+    //private float extraItemHeight = 260f; // Set to a positive value here
     private Vector3 initialPosition;
 
     private List<CustomData> customDataList = new List<CustomData>(); // Declare customDataList at the class level
@@ -28,15 +28,15 @@ public class DisplayingGoatNew : MonoBehaviour
             string jsonString = File.ReadAllText(jsonFilePath);
             ContainerDataList dataList = JsonUtility.FromJson<ContainerDataList>(jsonString);
 
-            int totalItems = dataList.dataList.Length;
-            float totalHeight = steadyHeight;
+            //int totalItems = dataList.dataList.Length;
+            //float totalHeight = steadyHeight;
 
-            if (totalItems > 7)
-            {
-                totalHeight += (totalItems - 7) * extraItemHeight;
-                Debug.Log("Total Items: " + totalItems);
-                Debug.Log("Total Height: " + totalHeight);
-            }
+           // if (totalItems > 7)
+            //{
+            //    totalHeight += (totalItems - 7) * extraItemHeight;
+            //    Debug.Log("Total Items: " + totalItems);
+            //    Debug.Log("Total Height: " + totalHeight);
+            //}
             // Subtract 20 from the total height
             //totalHeight -= 90f;
             foreach (ContainerData data in dataList.dataList)
@@ -66,9 +66,13 @@ public class DisplayingGoatNew : MonoBehaviour
             }
 
             // Set the height of the Container to match the total height required
+            //RectTransform containerRect = containerParent.GetComponent<RectTransform>();
+            //Vector2 containerSize = containerRect.sizeDelta;
+            //containerSize.y = totalHeight;
+            //containerRect.sizeDelta = containerSize;
             RectTransform containerRect = containerParent.GetComponent<RectTransform>();
             Vector2 containerSize = containerRect.sizeDelta;
-            containerSize.y = totalHeight;
+            containerSize.y = 1400; // Set the height to 1400
             containerRect.sizeDelta = containerSize;
 
             // Reset the position of the Container to the initial static position
